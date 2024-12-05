@@ -3,7 +3,8 @@
 module FTScreen_Control(
     input logic clk,
     input logic reset_n,
-    input logic SetColor,
+    input logic BTNR,
+    output logic SetColor,
     input logic f,
     output logic en_x
 );
@@ -28,7 +29,7 @@ module FTScreen_Control(
             IDLE: begin
                 if (!reset_n) 
                     next_state = B;
-                else if (SetColor)
+                else if (BTNR)
                     next_state = C;
                 else
                     next_state = IDLE;
@@ -57,10 +58,16 @@ module FTScreen_Control(
             IDLE: begin
                 en_x = 0;
             end
-            B, C: begin
+            B: begin
                 en_x = 1;
+               SetColor=0;
+
             end
-            
+            C: begin
+                en_x = 1;
+                SetColor=1;
+                
+            end
             
             default:  en_x = 0;
         endcase

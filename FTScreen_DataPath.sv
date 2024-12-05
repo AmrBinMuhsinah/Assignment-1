@@ -7,8 +7,10 @@ module FTScreen_DataPath(
     output logic [2:0] Color,
     output logic [7:0] x,
     output logic [6:0] y,
-    output f,
-    input logic SetColor
+    output logic f,
+    input logic SetColor,
+    output logic plot
+
 );
     logic grt_result, eq_result, eqy_result,en_XX;
 
@@ -34,5 +36,7 @@ module FTScreen_DataPath(
     assign f = eqy_result & eq_result;
 
     assign Color = (SetColor) ? y[2:0] : 3'b000;
+    
+    assign plot = en_x;
 
 endmodule

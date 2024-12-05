@@ -3,17 +3,20 @@
 module FTScreen(
     input logic clk,
     input logic reset_n,
-    input logic SetColor,
+    input logic BTN,
     output logic [2:0] Color,
     output logic [7:0] x,
-    output logic [6:0] y
+    output logic [6:0] y,
+    output logic plot
+
 );
-    logic en_x, f,ss;
+    logic en_x, f,SetColor;
 
     FTScreen_Control control_unit (
         .clk(clk),
         .reset_n(reset_n),
         .SetColor(SetColor),
+        .BTNR(BTN),
         .f(f),
         .en_x(en_x)
     );
@@ -26,6 +29,7 @@ module FTScreen(
         .x(x),
         .y(y),
         .f(f),
-        .SetColor(SetColor)
+        .SetColor(SetColor),
+        .plot(plot)
     );
 endmodule
