@@ -62,9 +62,7 @@ module FTScreen_Control(
             end
             
             
-            default: begin
-                en_x = 0;
-            end
+            default:  en_x = 0;
         endcase
     end
 endmodule

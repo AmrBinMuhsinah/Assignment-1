@@ -7,14 +7,14 @@ module FTScreen_DataPath(
     output logic [2:0] Color,
     output logic [7:0] x,
     output logic [6:0] y,
-    output f
- //   output logic SetColor
+    output f,
+    input logic SetColor
 );
-    logic grt_result, eq_result, eqy_result,SetColor;
+    logic grt_result, eq_result, eqy_result,en_XX;
 
     n_counter #(.n(8)) countx (
         .clk(clk),
-        .reset_n(grt_result & reset_n),
+        .reset_n(en_XX),
         .en(en_x),                 
         .count(x)
     );
@@ -25,11 +25,12 @@ module FTScreen_DataPath(
         .en(eq_result),                 
         .count(y)
     );
-
-    assign grt_result = (x > 160);
+    
+    assign grt_result = ~(x > 159);
     assign eq_result = (x == 159);
     assign eqy_result = (y == 119);
-
+    
+    assign en_XX =grt_result & reset_n;
     assign f = eqy_result & eq_result;
 
     assign Color = (SetColor) ? y[2:0] : 3'b000;

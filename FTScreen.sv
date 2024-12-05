@@ -8,7 +8,7 @@ module FTScreen(
     output logic [7:0] x,
     output logic [6:0] y
 );
-    logic en_x, f;
+    logic en_x, f,ss;
 
     FTScreen_Control control_unit (
         .clk(clk),
@@ -25,6 +25,7 @@ module FTScreen(
         .Color(Color),
         .x(x),
         .y(y),
-        .f(f)
+        .f(f),
+        .SetColor(SetColor)
     );
 endmodule
